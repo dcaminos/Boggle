@@ -20,7 +20,7 @@ export const GameStatus = {
   SCORES: "SCORES",
 };
 
-const TOTAL_TIME = 5;
+const TOTAL_TIME = 30;
 
 //Initial State
 const initialState = {

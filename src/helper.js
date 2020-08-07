@@ -32,31 +32,20 @@ function randomInt(min, max) {
   return min + Math.floor((max - min) * Math.random());
 }
 
-function shuffle(array) {
-  var currentIndex = array.length,
-    temporaryValue,
-    randomIndex;
-
-  // While there remain elements to shuffle...
-  while (0 !== currentIndex) {
-    // Pick a remaining element...
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
-
-    // And swap it with the current element.
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
-  }
-
-  return array;
-}
-
 const runDice = (diceIndex) => {
   if (diceIndex >= 0 && diceIndex < 25) {
     return dices[diceIndex][randomInt(0, 5)];
   } else {
     return "";
+  }
+};
+
+const shuffle = (array) => {
+  for (let i = 0; i < array.length; i++) {
+    const aux = array[i];
+    const randomIndex = randomInt(0, array.length);
+    array[i] = array[randomIndex];
+    array[randomIndex] = aux;
   }
 };
 
