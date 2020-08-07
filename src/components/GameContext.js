@@ -20,7 +20,7 @@ export const GameStatus = {
   SCORES: "SCORES",
 };
 
-const TOTAL_TIME = 30;
+const TOTAL_TIME = 180; //3 minutes
 
 //Initial State
 const initialState = {
@@ -45,10 +45,11 @@ function reducer(state, action) {
       };
     case START_GAME:
       return {
-        ...state,
+        ...initialState,
         status: GameStatus.PLAYING,
+        scores: state.scores,
         board: createBoard(),
-        score: 0,
+        dictionary: state.dictionary,
         time: TOTAL_TIME,
       };
     case CLICK_TILE:
@@ -72,6 +73,8 @@ function reducer(state, action) {
       return {
         ...state,
         scores: newScores,
+        list: initialState.list,
+        lastSelected: initialState.lastSelected,
         status: GameStatus.SCORES,
       };
     default:

@@ -7,6 +7,7 @@ import {
   START_GAME,
   SUBMIT_SCORE,
 } from "./GameContext";
+import ScoreTable from "./ScoreTable";
 import SubmitButton from "./SubmitButton";
 import SubmittedWords from "./SubmittedWords";
 import Timer from "./Timer";
@@ -32,22 +33,26 @@ function Layout() {
   if (state.status === GameStatus.FINISHED) {
     return (
       <div>
-        <span>Your score was: {state.score}</span>
-        <input value={name} onChange={(e) => setName(e.target.value)} />
-        <button
-          disabled={name.length < 3}
-          onClick={() => {
-            dispatch({
-              type: SUBMIT_SCORE,
-              payload: {
-                name,
-                points: state.score,
-              },
-            });
-          }}
-        >
-          SUBMIT YOUR SCORE
-        </button>
+        <div>Your score was: {state.score}</div>
+        <div>
+          <input value={name} onChange={(e) => setName(e.target.value)} />
+        </div>
+        <div>
+          <button
+            disabled={name.length < 3}
+            onClick={() => {
+              dispatch({
+                type: SUBMIT_SCORE,
+                payload: {
+                  name,
+                  points: state.score,
+                },
+              });
+            }}
+          >
+            SUBMIT YOUR SCORE
+          </button>
+        </div>
       </div>
     );
   }
@@ -55,12 +60,8 @@ function Layout() {
   if (state.status === GameStatus.SCORES) {
     return (
       <div>
-        Scores:
-        {state.scores.map((score, index) => (
-          <span key={`${index}`}>
-            {score.name}&nbsp;<strong>{score.points}</strong>
-          </span>
-        ))}
+        <ScoreTable />
+
         <button
           onClick={() => {
             dispatch({
@@ -76,6 +77,7 @@ function Layout() {
 
   return (
     <div className="layout">
+      <h1>Boggle</h1>
       <Timer />
       <Board />
       <CurrentWord />
