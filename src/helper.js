@@ -82,6 +82,7 @@ export const createBoard = () => {
 
 export const resolveClick = (state, click) => {
   if (state.lastSelected === null) {
+    //first selection
     return { ...state, lastSelected: click, list: [click] };
   } else {
     if (!isSelected(state.list, click)) {
@@ -89,6 +90,19 @@ export const resolveClick = (state, click) => {
         const list = [...state.list];
         list.push(click);
         return { ...state, lastSelected: click, list: list };
+      }
+    } else if (
+      state.lastSelected.x === click.x &&
+      state.lastSelected.y === click.y
+    ) {
+      //Undo action
+      if (state.list.length > 1) {
+        const list = [...state.list];
+        list.pop();
+        return { ...state, lastSelected: list[list.length - 1], list: list };
+      } else {
+        //when you have only one selected
+        return { ...state, lastSelected: null, list: [] };
       }
     }
   }

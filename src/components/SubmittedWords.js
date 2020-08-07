@@ -8,8 +8,8 @@ function SubmittedWord() {
     <div>
       <div>
         Submitted Words:
-        {state.words.map((submitted) => (
-          <div>
+        {state.words.map((submitted, index) => (
+          <div key={`${index}`}>
             <span>{submitted.word}</span>
             <strong>{submitted.score}</strong>
           </div>

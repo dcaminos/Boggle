@@ -6,8 +6,8 @@ function Word({ word }) {
 
   return (
     <div>
-      {word.map((leterIndex) => (
-        <span>{state.board[leterIndex.y][leterIndex.x]}</span>
+      {word.map((leterIndex, index) => (
+        <span key={`${index}`}>{state.board[leterIndex.y][leterIndex.x]}</span>
       ))}
     </div>
   );
